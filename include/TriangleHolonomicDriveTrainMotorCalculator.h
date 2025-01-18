@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>   
-#include <globals.h>
-#include <utils.h>
+#include "globals.h"
+#include "utils.h"
 
 /*
 
@@ -59,7 +59,8 @@ void updateMatrix(int omega)
 //calculates matrix equation for m1,m2,m3
 void calculateMotorValues(int ax, int ay, int r)
     {
-
+    
+    
     int componentMatrix[3] = {ax,ay,r};
 
     //For the first row of the result

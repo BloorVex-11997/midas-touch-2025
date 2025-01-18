@@ -1,5 +1,7 @@
 #include "main.h"
-#include "TriangleHolonomicDriveTrainMotorCalculator.hpp"
+#include "TriangleHolonomicDriveTrainMotorCalculator.h"
+#include "IntertialUtils.h"
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -16,6 +18,7 @@ void on_center_button() {
 	}
 }
 
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -23,10 +26,17 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+	//initialize all robot objects
+	
+	
+
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+	calibrate_sensor(imu_sensor);
+	autonomous();
 }
 
 /**
@@ -58,7 +68,12 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	while(true){
+		debug_value_with_text("heading is: " , imu_sensor.get_heading());
+		pros::delay(100);  
+	}
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
