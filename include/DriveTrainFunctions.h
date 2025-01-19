@@ -16,9 +16,9 @@ void handleMovement(int ax, int ay, double omega){
     
     debug_args(2, motorValueArray[0], motorValueArray[1], motorValueArray[3]);
     
-    motor1.move(static_cast<int>(motorValueArray[0] * 1));
-    motor2.move(static_cast<int>(motorValueArray[1] * 1));
-    motor3.move(static_cast<int>(motorValueArray[2] * 1));
+    motor1.move(static_cast<int>(motorValueArray[0]));
+    motor2.move(static_cast<int>(motorValueArray[1]));
+    motor3.move(static_cast<int>(motorValueArray[2]));
     
 
 }
