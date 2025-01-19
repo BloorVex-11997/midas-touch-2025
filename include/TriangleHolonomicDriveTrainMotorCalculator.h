@@ -46,18 +46,18 @@ static double TransformationMatrix[3][3] = {
 
 
 //updates the transformation matrix with the accumulated rotation
-void updateMatrix(int omega)
+void updateMatrix(double omega)
     {
     TransformationMatrix[0][0] = cos(rad(THETA1 + 90.0 + omega));
     TransformationMatrix[0][1] = sin(rad(THETA1 + 90.0 + omega));
     TransformationMatrix[1][0] = cos(rad(THETA2 + 90.0 + omega));
     TransformationMatrix[1][1] = sin(rad(THETA2 + 90.0 + omega));
-    TransformationMatrix[2][0] = cos(rad(THETA3 + 90.0 + omega));
-    TransformationMatrix[2][1] = sin(rad(THETA3 + 90.0 + omega));
+    TransformationMatrix[2][0] = cos(rad(omega));
+    TransformationMatrix[2][1] = sin(rad(omega));
     }
 
 //calculates matrix equation for m1,m2,m3
-void calculateMotorValues(int ax, int ay, int r)
+void calculateMotorValues(double ax, double ay, int r)
     {
     
     
