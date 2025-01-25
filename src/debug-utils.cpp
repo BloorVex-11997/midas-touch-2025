@@ -1,14 +1,10 @@
-#pragma once
 #include "globals.h"
+#include "main.h"
+#include "robot/debug-utils.h"
 #include <cstring>
 #include <sstream>
-//converts degrees to radians
-double rad(double deg){
-    return deg * (pi / 180);
-}
 
-void debug_value(double value){
-
+void debug_value(double value) {
     std::string str = std::to_string(value);
 
     // Create a character array large enough to hold the string
@@ -20,8 +16,7 @@ void debug_value(double value){
 	pros::lcd::set_text(1, charArray);
 }
 
-void debug_value(int value){
-
+void debug_value(int value) {
     std::string str = std::to_string(value);
 
     // Create a character array large enough to hold the string
@@ -67,8 +62,8 @@ void debug_value_with_text(const std::string& text, int value) {
     pros::lcd::set_text(1, charArray);
 }
 
-template <typename... Args>
-void debug_args(int line, float arg1, float arg2, float arg3) {
+
+void debug_args(int line, double arg1, double arg2, double arg3) {
     std::ostringstream oss;
     // Concatenate the float arguments with appropriate formatting
     oss << "Arg1: " << arg1 << ", Arg2: " << arg2 << ", Arg3: " << arg3;

@@ -1,6 +1,4 @@
-#pragma once 
-#include "utils.h"
-#include "main.h"
+#include "robot/inertial-utils.h"
 
 void calibrate_sensor(pros::IMU& imu_sensor){
     imu_sensor.reset();
@@ -15,5 +13,5 @@ void calibrate_sensor(pros::IMU& imu_sensor){
 
  	debug_value_with_text("took this many ms to calibrate: ", iter);
 	pros::delay(500);
-  // should print about 2000 ms
+  // should print about 2000 ms to recalibrate
 }

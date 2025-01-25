@@ -1,7 +1,7 @@
 #include "main.h"
-#include "TriangleHolonomicDriveTrainMotorCalculator.h"
-#include "IntertialUtils.h"
-#include "DriveTrainFunctions.h"
+#include "robot/holonomic-calculator.h"
+#include "robot/inertial-utils.h"
+#include "robot/drivetrain-functions.h"
 
 /**
  * A callback function for LLEMU's center button.

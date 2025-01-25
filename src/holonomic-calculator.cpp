@@ -1,31 +1,12 @@
-#pragma once
+
 #include <cmath>   
-#include "globals.h"
-#include "utils.h"
+#include "robot/holonomic-calculator.h"
 
-/*
+//converts degrees to radians
+double rad(double deg){
+    return deg * (pi / 180);
+}
 
-Equation (in degrees) ->
-
-|m1|    | cos(theta1 + 90)   sin(theta1 + 90)    1 |   |ax|
-|m2| =  | cos(theta2 + 90)   sin(theta2 + 90)    1 | * |ay|
-|m3|    | cos(theta3 + 90)   sin(theta3 + 90)    1 |   |r |
-
-where theta_i represents the angle of a motor_i with respect
-to a line drawn through the centroid of the three wheels 
-
-omega is the accumulated rotation of the robot with respect to
-how much the front has rotated from its neutral position
-
-theta1 = 30 + omega
-theta2 = 150 + omega 
-theta3 = 270 + omega 
-
-a is the vector representing the movement of the robot
-by extension ax and ay are the x and y components of the vector a
-
-r is the angular speed of the wheels 
-*/
 
 
 //stores motor vector magnitudes
