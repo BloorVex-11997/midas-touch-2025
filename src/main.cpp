@@ -1,7 +1,7 @@
 #include "main.h"
-#include "robot/holonomic-calculator.h"
+#include "robot/holonomic-calculator.hpp"
 #include "robot/inertial-utils.h"
-#include "robot/drivetrain-functions.h"
+#include "robot/drivetrain-functions.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -28,8 +28,6 @@ void on_center_button() {
  */
 void initialize() {
 	//initialize all robot objects
-	
-	
 
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
@@ -72,21 +70,18 @@ void competition_initialize() {}
 void autonomous() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	
-	while(true){
+	while(true) {
 		int ax = master.get_analog(ANALOG_RIGHT_X);
 		int ay = master.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
 		
 		 if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
             calibrate_sensor(imu_sensor);
 		 }
-		debug_value_with_text("heading is: " , imu_sensor.get_heading());
+		// debug_value_with_text("heading is: " , );
+		debug_args(4, ax, ay, imu_sensor.get_heading());
 		
-		handleMovement(ax,ay, imu_sensor.get_heading());
+		handle_movement(ax, ay, imu_sensor.get_heading());
 		pros::delay(20);
-		
-		
-		
-
 	}
 }
 

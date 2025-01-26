@@ -3,8 +3,11 @@
 #include <cstring>
 
 /**
- * different debug functions used to print values to the screen, and contains multiple overloads in case of different values
+ * Debug functions used to print values 
+ * to the screen, and contains multiple 
+ * overloads in case of different values
  */
+
 void debug_value(double value);
 
 void debug_value(int value);
