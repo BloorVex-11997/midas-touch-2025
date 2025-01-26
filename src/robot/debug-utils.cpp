@@ -1,8 +1,9 @@
-#include "globals.h"
-#include "main.h"
-#include "robot/debug-utils.h"
 #include <cstring>
 #include <sstream>
+
+#include "globals.hpp"
+#include "main.h"
+#include "robot/debug-utils.hpp"
 
 void debug_value(double value) {
     std::string str = std::to_string(value);
@@ -67,6 +68,30 @@ void debug_args(int line, double arg1, double arg2, double arg3) {
     std::ostringstream oss;
     // Concatenate the float arguments with appropriate formatting
     oss << "Arg1: " << arg1 << ", Arg2: " << arg2 << ", Arg3: " << arg3;
+
+    pros::lcd::set_text(line, oss.str());
+}
+
+void debug_args(int line, int arg1, int arg2, int arg3) {
+    std::ostringstream oss;
+    // Concatenate the float arguments with appropriate formatting
+    oss << "Arg1: " << arg1 << ", Arg2: " << arg2 << ", Arg3: " << arg3;
+
+    pros::lcd::set_text(line, oss.str());
+}
+
+void debug_args(int line, double arg1, double arg2) {
+    std::ostringstream oss;
+    // Concatenate the float arguments with appropriate formatting
+    oss << "Arg1: " << arg1 << ", Arg2: " << arg2;
+
+    pros::lcd::set_text(line, oss.str());
+}
+
+void debug_args(int line, int arg1, int arg2) {
+    std::ostringstream oss;
+    // Concatenate the float arguments with appropriate formatting
+    oss << "Arg1: " << arg1 << ", Arg2: " << arg2;
 
     pros::lcd::set_text(line, oss.str());
 }

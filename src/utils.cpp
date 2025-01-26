@@ -1,5 +1,5 @@
-#include "utils.h"
-#include "globals.h"
+#include "utils.hpp"
+#include "globals.hpp"
 
 int clamp(int x, int min, int max) {
     if (x > max)

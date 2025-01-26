@@ -1,6 +1,6 @@
 #pragma once 
 #include "main.h"
-#include "robot/debug-utils.h"
+#include "robot/debug-utils.hpp"
 
 /**
 	Recalibrates the IMU sensor for the robot, and resets the heading for the robot
