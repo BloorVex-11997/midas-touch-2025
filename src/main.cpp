@@ -1,7 +1,9 @@
 #include "main.h"
-#include "robot/holonomic-calculator.hpp"
-#include "robot/inertial-utils.h"
-#include "robot/drivetrain-functions.hpp"
+#include "robot/inertial-utils.hpp"
+#include "subsystems/drivetrain/holonomic-calculator.hpp"
+#include "subsystems/drivetrain/drivetrain.hpp"
+#include "subsystems/claw/claw.hpp"
+#include "subsystems/elevator/elevator.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -56,6 +58,21 @@ void disabled() {}
  */
 void competition_initialize() {}
 
+void mainloop() {
+	while (true) {
+		// on demand recalibration of the IMU sensor
+		if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			calibrate_sensor(imu_sensor);
+		}
+
+		drivetrain_periodic();
+		claw_periodic();
+		elevator_periodic();
+
+		pros::delay(20); // delay for 20 ms
+	}
+}
+
 /**
  * Runs the user autonomous code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -67,26 +84,7 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	
-	while(true) {
-		int ax = master.get_analog(ANALOG_RIGHT_X);
-		int ay = master.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
-		double heading = 360 - imu_sensor.get_heading();
-		
-		 if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-            calibrate_sensor(imu_sensor);
-		 }
-
-		// debug_value_with_text("heading is: " , );
-		debug_args(4, ax, ay, 0);
-		debug_args(5, heading, imu_sensor.get_heading(), 0);
-		
-		handle_movement(ax, ay, heading, static_cast<int>(master.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT));
-		pros::delay(20);
-	}
-}
+void autonomous() {}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -102,6 +100,5 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	
-	
+	mainloop();
 }

@@ -1,15 +1,21 @@
-#include "globals.h"
-#include "robot/drivetrain-functions.hpp"
-#include "robot/holonomic-calculator.hpp"
-#include "robot/debug-utils.h"
-#include "utils.h"
+#include "globals.hpp"
+#include "main.h"
+#include "robot/inertial-utils.hpp"
+#include "subsystems/drivetrain/drivetrain.hpp"
+#include "subsystems/drivetrain/holonomic-calculator.hpp"
+#include "robot/debug-utils.hpp"
+#include "utils.hpp"
 
 // Motor objects
 pros::Motor motor1(DRIVETRAIN_PORT_1);
 pros::Motor motor2(DRIVETRAIN_PORT_2);
 pros::Motor motor3(DRIVETRAIN_PORT_3);
 
+// pros::Controller controller(pros::E_CONTROLLER_MASTER);
+
 void handle_movement(int ax, int ay, double omega, int r) {
+
+    
     r = clamp(r, -TURN_VOLTAGE_LIMIT, TURN_VOLTAGE_LIMIT);
 
     update_matrix(omega);
@@ -29,17 +35,19 @@ void handle_movement(int ax, int ay, double omega, int r) {
     motor3.move(static_cast<int32_t>(motor_speeds[2]));
 }
 
-void turn() {
-    motor1.move(12);
-    motor2.move(12);
-    motor3.move(12);
-}
 
-void halt_movement(){
-    motor1.move(0);
-    motor2.move(0);
-    motor3.move(0);
-    motor1.brake();
-    motor2.brake();
-    motor3.brake();
+
+void drivetrain_periodic() {
+    int ax = controller.get_analog(ANALOG_RIGHT_X);
+	int ay = controller.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
+    double heading = 360 - imu_sensor.get_heading();
+    int rotation = controller.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT;
+    
+
+    if (DEBUG_MODE){
+        debug_args(4, ax, ay, 0);
+	    debug_args(5, heading, imu_sensor.get_heading(), 0.0);
+    }
+	
+    handle_movement(ax, ay, heading, rotation);
 }

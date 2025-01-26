@@ -1,5 +1,5 @@
 #include <cmath>   
-#include "robot/holonomic-calculator.hpp"
+#include "subsystems/drivetrain/holonomic-calculator.hpp"
 
 #define RECIPROCAL_DETERMINANT 2 / (3 * sqrt(3)) // Reciprocal of the determinant
 const double initial_omega = 0.0;
@@ -29,9 +29,7 @@ const double* get_motor_values() {
  * base matrix for calculating motor vectors
  */
 static double transformation_matrix[3][3] = {
-    // {(-3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),   (sqrt(3)*cos(rad(initial_omega))/2)+((3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
-    // {(3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),    (sqrt(3)*cos(rad(initial_omega))/2)-((3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
-    // {-1*(sqrt(3)*sin(rad(initial_omega))),                         -1*(sqrt(3)*cos(rad(initial_omega))),                          -1*sqrt(3)/2}
+    
     {(-3*sin(rad(initial_omega))/2)-(sqrt(3)*cos(rad(initial_omega))/2),   (3*cos(rad(initial_omega))/2)-(sqrt(3)*sin(rad(initial_omega))/2),   sqrt(3)/2},
     {(3*sin(rad(initial_omega))/2)-(sqrt(3)*cos(rad(initial_omega))/2),    (-3*cos(rad(initial_omega))/2)-(sqrt(3)*sin(rad(initial_omega))/2),   sqrt(3)/2},
     {(sqrt(3)*cos(rad(initial_omega))),                         (sqrt(3)*sin(rad(initial_omega))),                          sqrt(3)/2}
