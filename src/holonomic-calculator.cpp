@@ -1,7 +1,7 @@
 #include <cmath>   
 #include "robot/holonomic-calculator.hpp"
 
-#define RECIPROCAL_DETERMINANT -2 / (3 * sqrt(2)) // Reciprocal of the determinant
+#define RECIPROCAL_DETERMINANT 2 / (3 * sqrt(3)) // Reciprocal of the determinant
 const double initial_omega = 0.0;
 
 /**
@@ -32,9 +32,9 @@ static double transformation_matrix[3][3] = {
     // {(-3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),   (sqrt(3)*cos(rad(initial_omega))/2)+((3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
     // {(3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),    (sqrt(3)*cos(rad(initial_omega))/2)-((3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
     // {-1*(sqrt(3)*sin(rad(initial_omega))),                         -1*(sqrt(3)*cos(rad(initial_omega))),                          -1*sqrt(3)/2}
-    {(sqrt(3)*cos(rad(initial_omega))/2)+((3)*sin(rad(initial_omega))/2),   (-3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
-    {(sqrt(3)*cos(rad(initial_omega))/2)-((3)*sin(rad(initial_omega))/2),    (3*cos(rad(initial_omega))/2)+(sqrt(3)*sin(rad(initial_omega))/2),   -1*sqrt(3)/2},
-    {-1*(sqrt(3)*cos(rad(initial_omega))),                         -1*(sqrt(3)*sin(rad(initial_omega))),                          -1*sqrt(3)/2}
+    {(-3*sin(rad(initial_omega))/2)-(sqrt(3)*cos(rad(initial_omega))/2),   (3*cos(rad(initial_omega))/2)-(sqrt(3)*sin(rad(initial_omega))/2),   sqrt(3)/2},
+    {(3*sin(rad(initial_omega))/2)-(sqrt(3)*cos(rad(initial_omega))/2),    (-3*cos(rad(initial_omega))/2)-(sqrt(3)*sin(rad(initial_omega))/2),   sqrt(3)/2},
+    {(sqrt(3)*cos(rad(initial_omega))),                         (sqrt(3)*sin(rad(initial_omega))),                          sqrt(3)/2}
 };
 
 
@@ -43,12 +43,12 @@ static double transformation_matrix[3][3] = {
  * the accumulated rotation
  */
 void update_matrix(double phi) {
-    transformation_matrix[0][0] = (sqrt(3)*cos(rad(phi))/2)+((3)*sin(rad(phi))/2);
-    transformation_matrix[0][1] = (-3*cos(rad(phi))/2)+(sqrt(3)*sin(rad(phi))/2);
-    transformation_matrix[1][0] = (sqrt(3)*cos(rad(phi))/2)-((3)*sin(rad(phi))/2);
-    transformation_matrix[1][1] = (3*cos(rad(phi))/2)+(sqrt(3)*sin(rad(phi))/2);
-    transformation_matrix[2][0] = -1*(sqrt(3)*cos(rad(phi)));
-    transformation_matrix[2][1] = -1*(sqrt(3)*sin(rad(phi)));
+    transformation_matrix[0][0] = (-3*sin(rad(phi))/2)-(sqrt(3)*cos(rad(phi))/2);
+    transformation_matrix[0][1] = (3*cos(rad(phi))/2)-(sqrt(3)*sin(rad(phi))/2);
+    transformation_matrix[1][0] = (3*sin(rad(phi))/2)-(sqrt(3)*cos(rad(phi))/2);
+    transformation_matrix[1][1] = (-3*cos(rad(phi))/2)-(sqrt(3)*sin(rad(phi))/2);
+    transformation_matrix[2][0] = (sqrt(3)*cos(rad(phi)));
+    transformation_matrix[2][1] = (sqrt(3)*sin(rad(phi)));
 }
 
 /**
