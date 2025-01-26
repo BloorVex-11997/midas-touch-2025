@@ -73,14 +73,16 @@ void autonomous() {
 	while(true) {
 		int ax = master.get_analog(ANALOG_RIGHT_X);
 		int ay = master.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
+		double heading = 360 - imu_sensor.get_heading();
 		
 		 if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
             calibrate_sensor(imu_sensor);
 		 }
 		// debug_value_with_text("heading is: " , );
-		debug_args(4, ax, ay, imu_sensor.get_heading());
+		debug_args(4, ax, ay, 0);
+		debug_args(5, heading, imu_sensor.get_heading(), 0);
 		
-		handle_movement(ax, ay, imu_sensor.get_heading());
+		handle_movement(ax, ay, heading);
 		pros::delay(20);
 	}
 }
