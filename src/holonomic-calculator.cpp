@@ -55,7 +55,7 @@ void update_matrix(double phi) {
  * calculates matrix equation for m1,m2,m3
  */
 void calculate_motor_values(double ax, double ay, double r) {
-    double componentMatrix[3] = {ax,ay,0.0};
+    double componentMatrix[3] = {ax, ay, r};
     // For the first row of the result
     motorMatrix[0] = transformation_matrix[0][0] * componentMatrix[0] +
                      transformation_matrix[0][1] * componentMatrix[1] +

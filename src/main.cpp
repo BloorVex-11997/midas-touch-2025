@@ -78,11 +78,12 @@ void autonomous() {
 		 if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
             calibrate_sensor(imu_sensor);
 		 }
+
 		// debug_value_with_text("heading is: " , );
 		debug_args(4, ax, ay, 0);
 		debug_args(5, heading, imu_sensor.get_heading(), 0);
 		
-		handle_movement(ax, ay, heading);
+		handle_movement(ax, ay, heading, static_cast<int>(master.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT));
 		pros::delay(20);
 	}
 }
