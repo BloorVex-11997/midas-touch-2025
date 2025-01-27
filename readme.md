@@ -2,7 +2,7 @@
 
 
 
-![Midas Touch](banner.png)
+![Midas Touch](midas-logo.png)
 
 #   Project requirements
 
