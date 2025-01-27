@@ -1,11 +1,15 @@
-#pragma once 
+#pragma once
+
 #include "main.h"
 #include "robot/debug-utils.hpp"
 
 /**
-	Recalibrates the IMU sensor for the robot, and resets the heading for the robot
+	Recalibrate the IMU sensor, resetting the 
+	robot's heading.
 
-	WARNING: If the sensor is recalibrated and its not in the default position the movement will get messed up
-	because the heading will have been reset
+	@warning The robot must be in the default position before calibration.
+				Otherwise, movement will be scuffed.
+	
+	@param imu_sensor the sensor that should be calibrated.
  */
 void calibrate_sensor(pros::IMU& imu_sensor);

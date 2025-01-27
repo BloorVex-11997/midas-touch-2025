@@ -1,9 +1,14 @@
 #include <cmath>   
-#include "subsystems/drivetrain/holonomic-calculator.hpp"
 #include "utils.hpp"
+#include "subsystems/drivetrain/holonomic-calculator.hpp"
 
-#define RECIPROCAL_DETERMINANT 2 / (3 * sqrt(3)) // Reciprocal of the determinant
+const double RECIPROCAL_DETERMINANT = 2 / (3 * sqrt(3)); // Reciprocal of the determinant
 const double INITIAL_OMEGA = 0.0;
+
+/**
+ * For more documentation, 
+ * @see include/subsystems/drivetrain/holonomic-calculator.hpp
+ */
 
 /**
  * converts degrees to radians
