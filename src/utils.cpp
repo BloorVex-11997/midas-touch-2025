@@ -1,6 +1,11 @@
 #include "utils.hpp"
 #include "globals.hpp"
 
+/**
+ * For documentation, 
+ * @see include/utils.hpp
+ */
+
 int clamp(int x, int min, int max) {
     if (x > max)
         return max;

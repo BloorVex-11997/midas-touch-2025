@@ -13,6 +13,12 @@ pros::Motor motor3(DRIVETRAIN_PORT_3);
 
 bool is_precision_drive = false;
 
+/**
+ * Apply the motor_speeds to each of the motors.
+ * 
+ * @param motor_speeds const double[3] - values for each of 
+ *                      the three motors.
+ */
 void handle_movement(const double* motor_speeds) {
     if (DEBUG_MODE) debug_args(2, motor_speeds[0], motor_speeds[1], motor_speeds[2]);
     
@@ -27,8 +33,16 @@ void handle_movement(const double* motor_speeds) {
     motor3.move(static_cast<int32_t>(motor_speeds[2] * multiplier));
 }
 
-
-
+/**
+ * Update the motor_matrix with new information 
+ * such as the desired direction vector, heading,
+ * and desired rotation.
+ * 
+ * @param ax the horizontal component of the direction vector.
+ * @param ay the vertical component of the direction vector.
+ * @param heading the current field-relative heading of the robot.
+ * @param controller_rotation the desired amount rotation for the robot.
+ */
 void handle_matrix(int ax, int ay, double heading, int controller_rotation) {
     // updates matrix with accumulated rotation
     update_matrix_omega(heading);
@@ -43,8 +57,9 @@ void handle_matrix(int ax, int ay, double heading, int controller_rotation) {
     clamp_motor_values();
 }
 
-
-
+/**
+ * @see include/subsystems/drivetrain/drivetrain.hpp
+ */
 void drivetrain_periodic() {
     // read all inputs
     int ax = controller.get_analog(ANALOG_RIGHT_X);

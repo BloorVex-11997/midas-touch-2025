@@ -58,6 +58,12 @@ void disabled() {}
  */
 void competition_initialize() {}
 
+
+/**
+ * The main loop that handles all robot functions
+ * and synchronously calls all subsystem periodic functions.
+ * Runs approximately every 20 ms (50 iterations per second)
+ */
 void mainloop() {
 	while (true) {
 		// on demand recalibration of the IMU sensor

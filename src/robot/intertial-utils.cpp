@@ -1,8 +1,6 @@
 #include "globals.hpp"
 #include "robot/inertial-utils.hpp"
 
-// pros::IMU imu_sensor(IMU_PORT);
-
 void calibrate_sensor(pros::IMU& imu_sensor){
     imu_sensor.reset();
     int time = pros::millis();
@@ -16,5 +14,6 @@ void calibrate_sensor(pros::IMU& imu_sensor){
 
  	debug_value_with_text("took this many ms to calibrate: ", iter);
 	pros::delay(500);
-  // should print about 2000 ms to recalibrate
+	
+	// should print about 2000 ms to recalibrate
 }
