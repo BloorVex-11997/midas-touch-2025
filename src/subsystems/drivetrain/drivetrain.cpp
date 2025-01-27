@@ -11,43 +11,62 @@ pros::Motor motor1(DRIVETRAIN_PORT_1);
 pros::Motor motor2(DRIVETRAIN_PORT_2);
 pros::Motor motor3(DRIVETRAIN_PORT_3);
 
-// pros::Controller controller(pros::E_CONTROLLER_MASTER);
+bool is_precision_drive = false;
 
-void handle_movement(int ax, int ay, double omega, int r) {
-
+void handle_movement(const double* motor_speeds) {
+    if (DEBUG_MODE) debug_args(2, motor_speeds[0], motor_speeds[1], motor_speeds[2]);
     
-    r = clamp(r, -TURN_VOLTAGE_LIMIT, TURN_VOLTAGE_LIMIT);
-
-    update_matrix(omega);
-    calculate_motor_values(ax, ay, 0.0);
-    const double* motor_value_array = get_motor_values();
-    double motor_speeds[3] = {motor_value_array[0], motor_value_array[1], motor_value_array[2]};
-
-    for (int32_t i = 0; i < 3; i++) {
-        motor_speeds[i] += r;
-        motor_speeds[i] = voltage_clamp(motor_speeds[i]);
+    double multiplier = 1.0;
+    
+    if (is_precision_drive) {
+        multiplier = PRECISION_MULTIPLIER;
     }
+   
+    motor1.move(static_cast<int32_t>(motor_speeds[0] * multiplier));
+    motor2.move(static_cast<int32_t>(motor_speeds[1] * multiplier));
+    motor3.move(static_cast<int32_t>(motor_speeds[2] * multiplier));
+}
+
+
+
+void handle_matrix(int ax, int ay, double heading, int controller_rotation) {
+    // updates matrix with accumulated rotation
+    update_matrix_omega(heading);
+
+    // calculates the matrix with the new accumulated rotation
+    calculate_motor_values(ax, ay, 0.0);
     
-    debug_args(2, motor_value_array[0], motor_value_array[1], motor_value_array[2]);
+    // applies the rotation from the controller
+    apply_controller_rotation(controller_rotation);
     
-    motor1.move(static_cast<int32_t>(motor_speeds[0]));
-    motor2.move(static_cast<int32_t>(motor_speeds[1]));
-    motor3.move(static_cast<int32_t>(motor_speeds[2]));
+    // clamp motor the values to [-127, 127] after applying rotation
+    clamp_motor_values();
 }
 
 
 
 void drivetrain_periodic() {
+    // read all inputs
     int ax = controller.get_analog(ANALOG_RIGHT_X);
 	int ay = controller.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
-    double heading = 360 - imu_sensor.get_heading();
-    int rotation = controller.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT;
     
+    double heading = 360 - imu_sensor.get_heading();
+    int controller_rotation = controller.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT;
+    
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+		calibrate_sensor(imu_sensor);
+	}
 
-    if (DEBUG_MODE){
+    is_precision_drive = static_cast<bool>(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1));
+
+    if (DEBUG_MODE) {
         debug_args(4, ax, ay, 0);
 	    debug_args(5, heading, imu_sensor.get_heading(), 0.0);
     }
-	
-    handle_movement(ax, ay, heading, rotation);
+
+    // update the motor values
+    handle_matrix(ax, ay, heading, controller_rotation);
+
+    // use motor values to move 
+    handle_movement(get_motor_values());
 }
