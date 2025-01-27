@@ -9,13 +9,16 @@ const int DRIVETRAIN_PORT_2 = 7;
 const int DRIVETRAIN_PORT_3 = 1;
 const int IMU_PORT = 15;
 
+// Voltage Limits
 const int ABS_VOLTAGE_LIMIT = 127;
 
 const int TURN_VOLTAGE_LIMIT = 50;
-const int TURN_MULTIPLIER = 1;
 
 const bool DEBUG_MODE = true;
 
+// Multiplier
+const int TURN_MULTIPLIER = 1;
+const int PRECISION_MULTIPLIER = 0.5;
 
 //robot objects :)
 inline pros::IMU imu_sensor(IMU_PORT);

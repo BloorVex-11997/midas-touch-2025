@@ -6,16 +6,20 @@ TODO: documentation
 */
 
 /**
- * returns a pointer to the motorMatrix, 
- * ensures that motorMatrix cannot be modified
+ * returns a pointer to the motor_matrix, 
+ * ensures that motor_matrix cannot be modified
  */
 const double* get_motor_values();
+
+void apply_controller_rotation(int rotation);
+
+void clamp_motor_values();
 
 /**
  * updates the transformation matrix with
  * the accumulated rotation
  */
-void update_matrix(double omega);
+void update_matrix_omega(double omega);
     
 
 /**
