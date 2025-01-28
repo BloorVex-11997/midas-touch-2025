@@ -1,5 +1,5 @@
 <h1 align="center">
-   <img src="https://github.com/BloorVex-11997/midas-touch-2025/blob/main/midas-logo.png" width=64></img>
+   <img src="https://github.com/BloorVex-11997/midas-touch-2025/blob/main/midas-logo.png" width=420></img>
    <br>
    Team 11997A M1DA5
 </h1>
