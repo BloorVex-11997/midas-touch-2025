@@ -50,18 +50,16 @@ After that click **Run**
 
 # Holonomic Drivetrain Math
 
-Author: Mateo Barbosa, Safwan Ahmed 
+Author: Mateo Barbosa, Safwan Ahmed <br>
 Date: January 28, 2025
 
 We can derive the following matrix equation, which shows the relationship between the speeds of the motors and the angles at which the wheels are oriented, and gives the vector $a$ which is then decomposed into $a_x, a_{y}$.
 
-$$
-\begin{bmatrix}
+$$\begin{bmatrix}
 a_{x} \\
 a_{y} \\
 \omega
-\end{bmatrix}
-=
+\end{bmatrix} =
 \begin{bmatrix}
 \cos(\theta_{1} + \frac{\pi}{2} + \Omega) & \cos(\theta_{2} + \frac{\pi}{2} + \Omega) & \cos(\theta_{3} + \frac{\pi}{2} + \Omega) \\
 \sin(\theta_{1} + \frac{\pi}{2} + \Omega) & \sin(\theta_{2} + \frac{\pi}{2} + \Omega) & \sin(\theta_{3} + \frac{\pi}{2} + \Omega) \\
@@ -71,23 +69,21 @@ a_{y} \\
 m_{1} \\
 m_{2} \\
 m_{3}
-\end{bmatrix}
-$$
+\end{bmatrix}$$
 
 Where:
 
 - $m_{1}, m_{2}$ and $m_{3}$ are the speeds of the motors.
-- $ a_x, a_{y} $ are the $ x $ and $ y $ components of the vector that represents the robot.
-- $ \omega $ represents the angular velocity of the motors and acts as a scalar.
-- $ \Omega $ represents the total angular displacement from the original rotation.
-- $ \theta_{1}, \theta_{2} $ and $ \theta_{3} $ represent the angles at which the motors are oriented.
+- $a_{x}, a_{y}$ are the $x$ and $y$ components of the vector that represents the robot.
+- $\omega$ represents the angular velocity of the motors and acts as a scalar.
+- $\Omega$ represents the total angular displacement from the original rotation.
+- $\theta_{1}, \theta_{2}$ and $\theta_{3}$ represent the angles at which the motors are oriented.
 
-We take the measures of $ \theta $ with one motor of the triangle facing upwards directly. The angles are measured as they would be in a system with four quadrants going counterclockwise. From this, we find $ \theta_{1}, \theta_{2} $ and $ \theta_{3} $ as $ \frac{\pi}{6}, \frac{5\pi}{6} $ and $ \frac{3\pi}{2} $ respectively.
+We take the measures of $\theta$ with one motor of the triangle facing upwards directly. The angles are measured as they would be in a system with four quadrants going counterclockwise. From this, we find $\theta_{1}, \theta_{2}$ and $\theta_{3}$ as $\frac{\pi}{6}, \frac{5\pi}{6}$ and $\frac{3\pi}{2}$ respectively.
 
-From this, we can represent the $ \cos $ and $ \sin $ in terms of only $ \Omega $:
+From this, we can represent the $\cos$ and $\sin$ in terms of only $\Omega$:
 
-$$
-\begin{bmatrix}
+$$\begin{bmatrix}
 a_{x}\\
 a_{y}\\
 \omega
@@ -101,37 +97,30 @@ a_{y}\\
 m_{1}\\
 m_{2}\\
 m_{3}
-\end{bmatrix}
-$$
+\end{bmatrix}$$
 
-We aim to invert a $ 3 \times 3 $ matrix to compute the relationship:
+We aim to invert a $3\times3$ matrix to compute the relationship:
 
-$
-\mathbf{a} = \mathbf{M} \cdot \mathbf{b},
-$
+$\mathbf{a} = \mathbf{M} \cdot \mathbf{b},$
 
 Where:
 
-- $ \mathbf{a} $ is a $ 3 \times 1 $ vector of motor values.
-- $ \mathbf{b} $ is a $ 3 \times 1 $ vector of $ (a_x, a_y, \omega) $.
-- $ \mathbf{M} $ is a $ 3 \times 3 $ transformation matrix.
+- $\mathbf{a}$ is a $3\times1$ vector of motor speeds in the form $(m_1,m_2,m_3)$ .
+- $\mathbf{b}$ is a $3\times1$ vector of $(a_x, a_y,\omega)$.
+- $\mathbf{M}$ is a $3\times3$ transformation matrix.
 
-By inverting the matrix $ \mathbf{M} $, we can solve for $ \mathbf{b} $ in terms of $ \mathbf{a} $:
+By inverting the matrix $\mathbf{M}$, we can solve for $\mathbf{b}$ in terms of $\mathbf{a}$:
 
-$
-\mathbf{b} = \mathbf{M}^{-1} \cdot \mathbf{a}.
-$
+$\mathbf{b} = \mathbf{M}^{-1} \cdot \mathbf{a}.$
 
-The inverse of a $ 3 \times 3 $ matrix $ \mathbf{M} $ is given by:
+The inverse of a $3\times3$ matrix $\mathbf{M}$ is given by:
 
-$
-\mathbf{M}^{-1} = \frac{1}{\det(\mathbf{M})} \cdot \text{adj}(\mathbf{M}),
-$
+$\mathbf{M}^{-1} = \frac{1}{\det(\mathbf{M})} \cdot \text{adj}(\mathbf{M}),$
 
 Where:
 
-- $ \det(\mathbf{M}) $ is the determinant of $ \mathbf{M} $.
-- The adjugate matrix $ \text{adj}(\mathbf{M}) $ is the transpose of the cofactor matrix, where each element is the determinant of the $ 2 \times 2 $ submatrix formed by removing the corresponding row and column from $ \mathbf{M} $.
+- $\det(\mathbf{M})$ is the determinant of $\mathbf{M}$.
+- The adjugate matrix $\text{adj}(\mathbf{M})$ is the transpose of the cofactor matrix, where each element is the determinant of the $2\times2$ submatrix formed by removing the corresponding row and column from $\mathbf{M}$.
 
 After inverting, we end up with the matrix equation:
 
@@ -154,7 +143,7 @@ a_{y}\\
 \end{bmatrix}
 $$
 
-Where we can now solve for $ m_{1}, m_{2} $ and $ m_{3} $ by inputting the desired $ a_x, a_y $ and $ \omega $ respectively.
+Where we can now solve for $m_{1}, m_{2}$ and $m_{3}$ by inputting the desired $a_x, a_y$ and $\omega$ respectively.
 
 
 
