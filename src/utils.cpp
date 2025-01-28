@@ -17,3 +17,12 @@ int clamp(int x, int min, int max) {
 int voltage_clamp(int voltage) {
     return clamp(voltage, -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
 }
+
+int sign(double x) {
+    if (x > 0)
+        return 1;
+    else if (x < 0)
+        return -1;
+    else
+        return 1;
+}
