@@ -3,8 +3,12 @@
    <br>
    Team 11997A M1DA5
 </h1>
-Welcome to our robot code repository, which is fully open-source with many examples, well-structured code, and intuitive comments. If you have any questions, feel free to create an issue with details.
-
+<p>
+   Midas Touch - VEX V5 Robot Midas Touch is a VEX V5 robot designed for precision, agility, and versatility. Featuring omni-directional movement powered by an advanced drivetrain and a robust elevator mechanism, this robot is built to excel in dynamic competition environments. 
+</p>
+<p>
+   Welcome to our robot code repository, which is fully open-source with many examples, well-structured code, and intuitive comments. If you have any questions, feel free to create an issue with details.
+</p>
 <br>
 <br>
 <br>
