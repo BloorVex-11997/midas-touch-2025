@@ -15,11 +15,14 @@ const int IMU_PORT = 15;
 /** Voltage Limits */
 const int ABS_VOLTAGE_LIMIT = 127;
 const int TURN_VOLTAGE_LIMIT = 50;
-const int ELEVATOR_SPEED = 50; // voltage [-127, 127]
+const int BELT_SPEED = 50; // voltage [-127, 127]
 
 /** Multipliers */
 const int TURN_MULTIPLIER = 1;
 const double PRECISION_MULTIPLIER = 0.5;
+
+/** Durations */
+const int ELEVATOR_EXTENSION_DURATION = 1000; // in ms
 
 /** Boolean Flags */
 const bool DEBUG_MODE = true;
