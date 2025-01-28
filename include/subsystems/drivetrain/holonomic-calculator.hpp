@@ -3,6 +3,11 @@
 #include "globals.hpp"
 
 /**
+ *  IMPORTANT: consult read me section for more in depth description on how the math works/is derived
+*/
+
+
+/**
  * @return const double[3] - motor_matrix containing the speed values for each motor
  */
 const double* get_motor_values();

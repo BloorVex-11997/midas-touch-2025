@@ -47,3 +47,13 @@ simply head to to the PROS section of your VSCode and click
 **Build and Upload**
 After that click **Run**
 
+# Holonomic Drivetrain Math
+
+<h1 align="center">
+   <img src="math1.png">
+   <img src="math2.png">
+</h1>
+
+## Source
+
+for a more in depth explanation of the math shown above [click here](https://youtu.be/ULQLD6VvXio?si=WE3N78HXeV3rWSJp)
