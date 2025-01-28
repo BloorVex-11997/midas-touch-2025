@@ -9,9 +9,6 @@
 <p>
    Welcome to our robot code repository, which is fully open-source with many examples, well-structured code, and intuitive comments. If you have any questions, feel free to create an issue with details.
 </p>
-<br>
-<br>
-<br>
 
 #   Project requirements
 - [PROS by perdue](https://marketplace.visualstudio.com/items?itemName=sigbots.pros)
