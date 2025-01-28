@@ -27,10 +27,13 @@ void handle_movement(const double* motor_speeds) {
     if (is_precision_drive) {
         multiplier = PRECISION_MULTIPLIER;
     }
-   
-    motor1.move(static_cast<int32_t>(motor_speeds[0] * multiplier));
-    motor2.move(static_cast<int32_t>(motor_speeds[1] * multiplier));
-    motor3.move(static_cast<int32_t>(motor_speeds[2] * multiplier));
+    
+    int speed1 = clamp(static_cast<int32_t>(motor_speeds[0] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
+    int speed2 = clamp(static_cast<int32_t>(motor_speeds[1] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
+    int speed3 = clamp(static_cast<int32_t>(motor_speeds[2] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
+    motor1.move(speed1);
+    motor2.move(speed2);
+    motor3.move(speed3);
 }
 
 /**
@@ -52,7 +55,7 @@ void handle_matrix(int ax, int ay, double heading, int controller_rotation) {
     
     // applies the rotation from the controller
     apply_controller_rotation(controller_rotation);
-    
+     
     // clamp motor the values to [-127, 127] after applying rotation
     clamp_motor_values();
 }
@@ -64,11 +67,11 @@ void drivetrain_periodic() {
     // read all inputs
     int ax = controller.get_analog(ANALOG_RIGHT_X);
 	int ay = controller.get_analog(ANALOG_RIGHT_Y);    // Gets amount forward/backward from left joystick
-    
+
     double heading = 360 - imu_sensor.get_heading();
     int controller_rotation = controller.get_analog(ANALOG_LEFT_X) / 127.0 * TURN_VOLTAGE_LIMIT;
     
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
 		calibrate_sensor(imu_sensor);
 	}
 

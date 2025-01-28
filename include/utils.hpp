@@ -17,3 +17,9 @@ int clamp(int x, int min, int max);
  * @returns clamped voltage
  */
 int voltage_clamp(int voltage);
+
+/**
+ * @param x [-INT_MAX, INT_MAX]
+ * @return [-1, 1]
+ */
+int sign(double x);

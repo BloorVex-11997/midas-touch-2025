@@ -16,7 +16,7 @@ const int TURN_VOLTAGE_LIMIT = 50;
 
 /** Multipliers */
 const int TURN_MULTIPLIER = 1;
-const int PRECISION_MULTIPLIER = 0.5;
+const double PRECISION_MULTIPLIER = 0.5;
 
 /** Boolean Flags */
 const bool DEBUG_MODE = true;
