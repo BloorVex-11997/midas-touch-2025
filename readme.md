@@ -4,7 +4,7 @@
    Team 11997A M1DA5
 </h1>
 <p>
-   Midas Touch - VEX V5 Robot Midas Touch is a VEX V5 robot designed for precision, agility, and versatility. Featuring omni-directional movement powered by an advanced drivetrain and a robust elevator mechanism, this robot is built to excel in dynamic competition environments. 
+   Midas Touch - VEX V5 Robot Midas Touch is a VEX V5 robot designed for precision, agility, and versatility. Featuring omnidirectional movement powered by an advanced drivetrain and a robust elevator mechanism, this robot is built to excel in dynamic competition environments. 
 </p>
 <p>
    Welcome to our robot code repository, which is fully open-source with many examples, well-structured code, and intuitive comments. If you have any questions, feel free to create an issue with details.
@@ -21,7 +21,7 @@
 
 
 ## What is PROS?
-PROS in an extension for VSCoed that allows us to interface between the Vex V5 robots and our computer. It lets us build and upload robot code both directly via wire and also wirelessly.
+PROS is an extension for VSCoed that allows us to interface between the Vex V5 robots and our computer. It lets us build and upload robot code both directly via wire and also wirelessly.
 
 
 ## Installation
@@ -29,13 +29,13 @@ Do the following in order:
 1. Install MINGW or **equivalent** GCC/G++ compilers 
    - [MINGW Installation guide for Windows](https://www.youtube.com/watch?v=sXW2VLrQ3Bs)
    - [GCC/G++ Compiler for Mac](https://www.youtube.com/watch?v=wY24ehH6mC0)
-   - If you have linux you don't need a guide figure it out
+   - If you have Linux you don't need a guide to figure it out
 2. Install VsCode from the [website](https://code.visualstudio.com)
 3. Install the PROS extension -> [PROS Perdue installation guide](https://pros.cs.purdue.edu/v5/getting-started/)
 
 
 ## Interfacing the robot 
-Once you have finished all the pre-requisite interfacing the robot is very simple
+Once you have finished all the pre-requisite interfacing, the robot is very simple
 
 ### Robot setup
 1. Plug the provided Micro USB cable into the Vex V5 brain
@@ -44,9 +44,9 @@ Once you have finished all the pre-requisite interfacing the robot is very simpl
 4. Run Brain Terminal Command to ensure proper connection
 
 ### Running code
-simply head to to the PROS section of your VSCode and click 
+simply head to the PROS section of your VSCode and click 
 **Build and Upload**
-After that click **Run**
+After that, click **Run**
 
 # Holonomic Drivetrain Math
 
@@ -153,4 +153,4 @@ Where we can now solve for $m_{1}, m_{2}$ and $m_{3}$ by inputting the desired $
 
 ## Source
 
-for a more in depth explanation of the math shown above [click here](https://youtu.be/ULQLD6VvXio?si=WE3N78HXeV3rWSJp)
+For a more in-depth explanation of the math shown above [click here](https://youtu.be/ULQLD6VvXio?si=WE3N78HXeV3rWSJp)
