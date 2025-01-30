@@ -66,10 +66,7 @@ void competition_initialize() {}
  */
 void mainloop() {
 	while (true) {
-		// on demand recalibration of the IMU sensor
-		if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-			calibrate_sensor(imu_sensor);
-		}
+		
 
 		drivetrain_periodic();
 		claw_periodic();

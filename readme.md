@@ -105,8 +105,8 @@ $\mathbf{a} = \mathbf{M} \cdot \mathbf{b},$
 
 Where:
 
-- $\mathbf{a}$ is a $3\times1$ vector of motor speeds in the form $(m_1,m_2,m_3)$ .
-- $\mathbf{b}$ is a $3\times1$ vector of $(a_x, a_y,\omega)$.
+- $\mathbf{b}$ is a $3\times1$ vector of motor speeds in the form $(m_1,m_2,m_3)$ .
+- $\mathbf{a}$ is a $3\times1$ vector of $(a_x, a_y,\omega)$.
 - $\mathbf{M}$ is a $3\times3$ transformation matrix.
 
 By inverting the matrix $\mathbf{M}$, we can solve for $\mathbf{b}$ in terms of $\mathbf{a}$:
