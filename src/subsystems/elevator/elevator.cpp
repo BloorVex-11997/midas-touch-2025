@@ -21,7 +21,6 @@ void extend_elevator() {
 }
 
 void retract_elevator() {
-    
     extension_direction = false;
     extension_end_time = pros::millis() + ELEVATOR_EXTENSION_DURATION;
 }
@@ -33,13 +32,12 @@ void set_belt_voltage(int voltage) {
     elevator_motor.move(voltage_clamp(voltage));
 }
 
+void set_elevator_extension_voltage(int voltage) {
+    elevator_extension_motor.move(voltage_clamp(voltage));
+}
+
+
 void elevator_periodic() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-        elevator_active = !elevator_active;
-
-        set_belt_voltage(elevator_active ? BELT_SPEED : 0);
-    }
-
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
         if (extension_direction)
             retract_elevator();
@@ -51,5 +49,26 @@ void elevator_periodic() {
         set_extension_voltage(127);
     } else {
         set_extension_voltage(0);
+    //makes sure you can't move arm and spin at the same time 
+    if (!elevator_active){
+
+        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            //elevator_active = !elevator_active;
+
+            set_elevator_extension_voltage(60);
+        }
+        else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+            //elevator_active = !elevator_active;
+
+            set_elevator_extension_voltage(60);
+        }
+        else{
+            set_elevator_extension_voltage(0);
+        }
+    }
+
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+        elevator_active = !elevator_active;
+        set_belt_voltage(elevator_active ? 80: 0);
     }
 }
