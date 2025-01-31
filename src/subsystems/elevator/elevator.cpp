@@ -22,33 +22,31 @@ void set_elevator_extension_voltage(int voltage) {
 
 void elevator_periodic() {
 
+    //makes sure you can't move arm and spin at the same time 
+    if (!elevator_active){
 
-    
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-        //elevator_active = !elevator_active;
+        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            //elevator_active = !elevator_active;
 
-        set_elevator_extension_voltage(100);
+            set_elevator_extension_voltage(60);
+        }
+        else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+            //elevator_active = !elevator_active;
+
+            set_elevator_extension_voltage(60);
+        }
+        else{
+            set_elevator_extension_voltage(0);
+        }
     }
-    else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-        //elevator_active = !elevator_active;
 
-        set_elevator_extension_voltage(-100);
-    }
-    else{
-        set_elevator_extension_voltage(0);
-    }
+    //control for elevator on toggle mode
 
-
-    //control for elevator 
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-        //elevator_active = !elevator_active;
-
-        set_elevator_voltage(127);
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+        elevator_active = !elevator_active;
+        set_elevator_voltage(elevator_active ? 80: 0);
     }
    
-    else{
-         set_elevator_voltage(0);
-    }
-
+    
 
 }
