@@ -1,6 +1,7 @@
-#include "main.h"
 #include "clamp.hpp"
+
 #include "globals.hpp"
+#include "main.h"
 
 pros::Motor clamp_motor(CLAMP_PORT);
 
@@ -11,6 +12,7 @@ void set_clamp_voltage(int voltage) {
     clamp_motor.move(voltage);
 }
 
+/*
 void clamp_periodic() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
         clamp_active = !clamp_active;
@@ -19,5 +21,14 @@ void clamp_periodic() {
 
     if (pros::millis() <= command_finish_time) {
         set_clamp_voltage(clamp_active ? CLAMP_SPEED : -CLAMP_SPEED);
+    }
+}
+*/
+
+void clamp_periodic() {
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+        set_clamp_voltage(CLAMP_SPEED);
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+        set_clamp_voltage(-CLAMP_SPEED);
     }
 }

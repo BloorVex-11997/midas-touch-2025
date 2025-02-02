@@ -18,7 +18,7 @@ void set_belt_voltage(int voltage) {
 }
 
 void elevator_periodic() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
         elevator_active = !elevator_active;
         set_belt_voltage(elevator_active ? BELT_SPEED : 0);
     }
