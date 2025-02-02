@@ -13,13 +13,13 @@ bool elevator_active = false;
  * @param voltage [-127, 127]
  */
 void set_belt_voltage(int voltage) {
-    elevator_motor_1.move(voltage_clamp(voltage));
-    elevator_motor_2.move(voltage_clamp(-voltage));
+    elevator_motor_1.move(voltage_clamp(-voltage));
+    elevator_motor_2.move(voltage_clamp(voltage));
 }
 
 void elevator_periodic() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
         elevator_active = !elevator_active;
-        set_belt_voltage(elevator_active ? -BELT_SPEED : 0);
+        set_belt_voltage(elevator_active ? BELT_SPEED : 0);
     }
 }
