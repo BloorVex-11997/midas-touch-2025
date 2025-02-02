@@ -1,9 +1,11 @@
-#include "main.h"
-#include "globals.hpp"
-#include "utils.hpp"
 #include "subsystems/elevator/elevator.hpp"
 
-pros::Motor elevator_motor(ELEVATOR_PORT);
+#include "globals.hpp"
+#include "main.h"
+#include "utils.hpp"
+
+pros::Motor elevator_motor_1(ELEVATOR_PORT_1);
+pros::Motor elevator_motor_2(ELEVATOR_PORT_2);
 
 bool elevator_active = false;
 
@@ -11,9 +13,9 @@ bool elevator_active = false;
  * @param voltage [-127, 127]
  */
 void set_belt_voltage(int voltage) {
-    elevator_motor.move(voltage_clamp(voltage));
+    elevator_motor_1.move(voltage_clamp(voltage));
+    elevator_motor_2.move(voltage_clamp(-voltage));
 }
-
 
 void elevator_periodic() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
