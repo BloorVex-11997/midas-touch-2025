@@ -1,10 +1,11 @@
 #include "main.h"
+
 #include "robot/inertial-utils.hpp"
-#include "subsystems/drivetrain/holonomic-calculator.hpp"
-#include "subsystems/drivetrain/drivetrain.hpp"
-#include "subsystems/claw/claw.hpp"
-#include "subsystems/elevator/elevator.hpp"
 #include "subsystems/clamp/clamp.hpp"
+#include "subsystems/claw/claw.hpp"
+#include "subsystems/drivetrain/drivetrain.hpp"
+#include "subsystems/drivetrain/holonomic-calculator.hpp"
+#include "subsystems/elevator/elevator.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -13,15 +14,14 @@
  * "I was pressed!" and nothing.
  */
 void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+    static bool pressed = false;
+    pressed = !pressed;
+    if (pressed) {
+        pros::lcd::set_text(2, "I was pressed!");
+    } else {
+        pros::lcd::clear_line(2);
+    }
 }
-
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -30,15 +30,15 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	//initialize all robot objects
+    // initialize all robot objects
 
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+    // pros::lcd::initialize();
+    // pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+    // pros::lcd::register_btn1_cb(on_center_button);
 
-	calibrate_sensor(imu_sensor);
-	autonomous();
+    // calibrate_sensor(imu_sensor);
+    autonomous();
 }
 
 /**
@@ -57,8 +57,10 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
-
+void competition_initialize() {
+    pros::lcd::initialize();
+    calibrate_sensor(imu_sensor);
+}
 
 /**
  * The main loop that handles all robot functions
@@ -66,14 +68,14 @@ void competition_initialize() {}
  * Runs approximately every 20 ms (50 iterations per second)
  */
 void mainloop() {
-	while (true) {
-		drivetrain_periodic();
-		claw_periodic();
-		elevator_periodic();
-		clamp_periodic();
+    while (true) {
+        drivetrain_periodic();
+        // claw_periodic();
+        elevator_periodic();
+        clamp_periodic();
 
-		pros::delay(20); // delay for 20 ms
-	}
+        pros::delay(20);  // delay for 20 ms
+    }
 }
 
 /**
@@ -103,5 +105,5 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	mainloop();
+    mainloop();
 }
