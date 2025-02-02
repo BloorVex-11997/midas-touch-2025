@@ -14,7 +14,6 @@ void set_belt_voltage(int voltage) {
     elevator_motor.move(voltage_clamp(voltage));
 }
 
-
 void elevator_periodic() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
         elevator_active = !elevator_active;

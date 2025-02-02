@@ -4,6 +4,7 @@
 #include "subsystems/drivetrain/drivetrain.hpp"
 #include "subsystems/claw/claw.hpp"
 #include "subsystems/elevator/elevator.hpp"
+#include "subsystems/clamp/clamp.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -66,11 +67,10 @@ void competition_initialize() {}
  */
 void mainloop() {
 	while (true) {
-		
-
 		drivetrain_periodic();
 		claw_periodic();
 		elevator_periodic();
+		clamp_periodic();
 
 		pros::delay(20); // delay for 20 ms
 	}
