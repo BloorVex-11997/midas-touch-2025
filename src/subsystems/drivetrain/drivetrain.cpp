@@ -14,6 +14,12 @@ pros::Motor motor3(DRIVETRAIN_PORT_3);
 
 bool is_precision_drive = false;
 
+void drivetrain_initialize() {
+    motor1.set_brake_mode(MOTOR_BRAKE_HOLD);
+    motor2.set_brake_mode(MOTOR_BRAKE_HOLD);
+    motor3.set_brake_mode(MOTOR_BRAKE_HOLD);
+}
+
 /**
  * Apply the motor_speeds to each of the motors.
  *
@@ -32,9 +38,20 @@ void handle_movement(const double* motor_speeds) {
     int speed1 = clamp(static_cast<int32_t>(motor_speeds[0] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
     int speed2 = clamp(static_cast<int32_t>(motor_speeds[1] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
     int speed3 = clamp(static_cast<int32_t>(motor_speeds[2] * multiplier), -ABS_VOLTAGE_LIMIT, ABS_VOLTAGE_LIMIT);
+
     motor1.move(speed1);
     motor2.move(speed2);
     motor3.move(speed3);
+
+    if (speed1 == 0) {
+        motor1.brake();
+    }
+    if (speed2 == 0) {
+        motor2.brake();
+    }
+    if (speed3 == 0) {
+        motor3.brake();
+    }
 }
 
 /**

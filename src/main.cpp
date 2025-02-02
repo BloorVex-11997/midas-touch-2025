@@ -38,6 +38,9 @@ void initialize() {
     // pros::lcd::register_btn1_cb(on_center_button);
 
     // calibrate_sensor(imu_sensor);
+
+    clamp_initialize();
+    drivetrain_initialize();
     autonomous();
 }
 
@@ -60,6 +63,8 @@ void disabled() {}
 void competition_initialize() {
     pros::lcd::initialize();
     calibrate_sensor(imu_sensor);
+    clamp_initialize();
+    drivetrain_initialize();
 }
 
 /**

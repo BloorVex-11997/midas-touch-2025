@@ -5,11 +5,19 @@
 
 pros::Motor clamp_motor(CLAMP_PORT);
 
+void clamp_initialize() {
+    clamp_motor.set_brake_mode(MOTOR_BRAKE_HOLD);
+}
+
 bool clamp_active = false;
 uint32_t command_finish_time = 0;
 
 void set_clamp_voltage(int voltage) {
-    clamp_motor.move(voltage);
+    if (voltage == 0) {
+        clamp_motor.brake();
+    } else {
+        clamp_motor.move(voltage);
+    }
 }
 
 /*
@@ -30,5 +38,7 @@ void clamp_periodic() {
         set_clamp_voltage(CLAMP_SPEED);
     } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
         set_clamp_voltage(-CLAMP_SPEED);
+    } else {
+        set_clamp_voltage(0);
     }
 }
