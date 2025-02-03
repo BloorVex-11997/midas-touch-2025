@@ -94,7 +94,24 @@ void mainloop() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+    // uint32_t start = pros::millis();
+    // uint32_t end = start + AUTO_DURATION;
+    // while (true) {
+    //     double heading = 360 - imu_sensor.get_heading();
+
+    //     const int forward = pros::millis() <= end ? 50 : 0;
+    //     debug_value_with_text("Forward: ", forward);
+    //     debug_value_with_text("End: ", (int)end);
+
+    //     // update the motor values
+    //     handle_matrix(0, forward, heading, 0);
+
+    //     // use motor values to move
+    //     handle_movement(get_motor_values());
+    //     pros::delay(20);
+    // }
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
